@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Kirish / Ro'yxatdan o'tish</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <!-- LOGIN FORMA -->
+    <div class="card" id="loginCard">
+        <h2>Tizimga kirish</h2>
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <label>Foydalanuvchi nomi</label>
+                <input type="text" name="username" required placeholder="Username kiriting">
+            </div>
+            <div class="input-group">
+                <label>Parol</label>
+                <input type="password" name="password" required placeholder="Parol kiriting">
+            </div>
+            <button type="submit" class="btn">Kirish</button>
+        </form>
+        <p class="toggle-auth">
+            Hali hisobingiz yo'qmi? <a href="#" onclick="toggleAuth()">Ro'yxatdan o'ting</a>
+        </p>
+    </div>
+
+    <!-- SIGNUP FORMA -->
+    <div class="card" id="signupCard" style="display: none;">
+        <h2>Ro'yxatdan o'tish</h2>
+        <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <label>Foydalanuvchi nomi</label>
+                <input type="text" name="username" required placeholder="Username tanlang">
+            </div>
+            <div class="input-group">
+                <label>Parol</label>
+                <input type="password" name="password" required placeholder="Parol yarating">
+            </div>
+            <button type="submit" class="btn">Ro'yxatdan o'tish</button>
+        </form>
+        <p class="toggle-auth">
+            Hisobingiz bormi? <a href="#" onclick="toggleAuth()">Kirish</a>
+        </p>
+    </div>
+
+    <script>
+        function toggleAuth() {
+            const login = document.getElementById('loginCard');
+            const signup = document.getElementById('signupCard');
+            if (login.style.display === 'none') {
+                login.style.display = 'block';
+                signup.style.display = 'none';
+            } else {
+                login.style.display = 'none';
+                signup.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mening To-Do Ro'yxatim</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .card { background: #ffffff; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); width: 100%; max-width: 550px; }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        h2 { color: #333; }
+        .logout-btn { color: #e53e3e; text-decoration: none; font-size: 14px; font-weight: bold; }
+        .todo-input-flex { display: flex; gap: 10px; margin-bottom: 20px; }
+        .todo-input-flex input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
+        .btn { padding: 12px 20px; background: #667eea; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: #5a67d8; }
+        .todo-list { list-style: none; }
+        .todo-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px; margin-bottom: 10px; }
+        .todo-item.completed span { text-decoration: line-through; color: #888; }
+        .actions { display: flex; gap: 8px; }
+        .btn-check { background: #38a169; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; text-decoration: none; }
+        .btn-del { background: #e53e3e; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="header-flex">
+            <h2>Mening Vazifalarim</h2>
+            <a href="{% url 'logout' %}" class="logout-btn">Chiqish</a>
+        </div>
+
+        <form class="todo-input-flex" action="{% url 'add_todo' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="task" placeholder="Yangi vazifa kiriting..." required>
+            <button type="submit" class="btn">Qo'shish</button>
+        </form>
+
+        <ul class="todo-list">
+            {% for todo in todos %}
+            <li class="todo-item {% if todo.completed %}completed{% endif %}">
+                <span>{{ todo.task }}</span>
+                <div class="actions">
+                    <a href="{% url 'complete_todo' todo.id %}" class="btn-check">✓</a>
+                    <a href="{% url 'delete_todo' todo.id %}" class="btn-del">✕</a>
+                </div>
+            </li>
+            {% empty %}
+            <p style="text-align: center; color: #888;">Hali vazifalar yo'q!</p>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+</html>
