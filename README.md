@@ -1,1 +1,1 @@
-bu loyha sizning ishlaringizni belgilab turish uchun
+bu loyha sizning ishlaringizni belgilab turish uchun yartilingan
