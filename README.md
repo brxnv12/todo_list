@@ -1,1 +1,12 @@
-bu loyha sizning ishlaringizni belgilab turish uchun yartilingan
+bu ishlashi kerak bulgan loyha
+
+
+
+
+
+
+
+
+
+
+
