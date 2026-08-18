@@ -1,12 +1,1 @@
-bu ishlashi kerak bulgan loyha
-
-
-
-
-
-
-
-
-
-
-
+this is a good site to write your meeting, parties 
